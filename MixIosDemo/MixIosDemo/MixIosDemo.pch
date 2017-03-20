@@ -1,0 +1,16 @@
+//
+//  MixIosDemo.pch
+//  MixIosDemo
+//
+//  Created by Dan.Lee on 2017/3/20.
+//  Copyright © 2017年 Dan Lee. All rights reserved.
+//
+
+#ifndef MixIosDemo_pch
+#define MixIosDemo_pch
+
+#ifdef __OBJC__
+#import "MixDecrypt.h"
+#endif
+
+#endif /* MixIosDemo_pch */

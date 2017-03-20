@@ -1,0 +1,11 @@
+#cocoapods
+Pods
+
+#project
+**/*.xccheckout
+**/*.xcscmblueprint
+**/contents.xcworkspacedata
+**/xcuserdata/*
+
+#merge 
+**/*.orig
