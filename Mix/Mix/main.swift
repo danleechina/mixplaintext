@@ -105,6 +105,7 @@ func matches(for regex: String, in text: String) -> [String] {
     }
 }
 
+// you can custom encrypt method by override this method
 func encrypt(input: String, staticKey: UInt8, version: UInt8) -> String? {
     if input.characters.count == 0 {
         printf("empty content")

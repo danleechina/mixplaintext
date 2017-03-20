@@ -48,6 +48,7 @@ static NSString *dl_getRealText(NSString *obscureText)
         storeData = [NSCache new];
     });
     if (![storeData objectForKey:obscureText]) {
+        // This is the decryptText, you can use your custom decrypt method
         NSString *decryptText = [[[NSData alloc] initWithBase64EncodedString:obscureText options:NSDataBase64DecodingIgnoreUnknownCharacters] dl_decryptTextUsingXOR];
         [storeData setObject:decryptText
                       forKey:obscureText];
