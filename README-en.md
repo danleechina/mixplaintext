@@ -13,6 +13,10 @@ This project aims to encypt or obscure plain text for all the Objective C implem
 2. Can't encrypt escape sequences contains \nnn,\xnn, \unnnn and \Unnnnnnnn. Make sure your objective-c string doesn't contain these.
 3. Can't encrypt static type string
 
+# Usage scenario
+
+1. Using private API, let MixPlainText handle the obscring, make sure don't invoke private API when in the Apple approval process
+2. Improving the difficulty of reverse analysis
 
 # Usage
 
@@ -42,6 +46,10 @@ The default encrypt method is xor(maybe it just obscrue the plain text). Two ste
 
 Attention, don't use complex encyrpt/decyrpt method, and make sure encyrpt/decyprt right, or the running will fail.
 
+# TODO
+
+1. Support C type string
+2. Support file type, like mm, h, pch, c, cpp type of file.
 
 # Contributors
 

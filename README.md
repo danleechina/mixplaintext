@@ -15,6 +15,11 @@ If you need English document for this project, [`MixPlainText ` English document
 2. 不能加密含 \nnn， \xnn， \unnnn 和 \Unnnnnnnn 这样的转义字符串，确保您的转义字符串不含这些转义，否则无法通过编译。
 3. 不能加密静态类型的 string。
 
+# 使用场景
+
+1. 使用私有 API，将加密操作交给 MixPlainText，只要不在审核期间调用，一般能够通过审核
+2. 提高逆向分析难度，因为所有明文都是经过加密混淆的，逆向分析需要先解密
+
 # 使用方式
 
 1. 编译运行 macOS 工程 Mix/Mix.xcodeproj，将得到的 Mix 二进制文件放到您需要混淆加密的工程的根目录。
@@ -42,6 +47,11 @@ If you need English document for this project, [`MixPlainText ` English document
 2. 修改 MixDecrypt.h 中 dl_getRealText 函数体的解密方法
 
 注意，不要使用复杂的加解密方法，同时解密方法要和加密方法配套，否则运行时会出错。
+
+# TODO
+
+1. 支持 C 类型的字符串
+2. 增加支持更多的文件类型，比如 mm 文件， h 文件，pch 文件， c 文件， cpp 文件等
 
 # 贡献者
 
