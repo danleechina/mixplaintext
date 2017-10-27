@@ -31,7 +31,6 @@
     
     NSData *decryptedData = [[NSData alloc] initWithBytes:bytesBuffer length:(originalBytesLength - 2)];
     NSString *decryptedString = [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
-    
     free(bytesBuffer);
     bytesBuffer = NULL;
     

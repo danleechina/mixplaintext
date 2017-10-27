@@ -170,7 +170,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n./Mix\nfi";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\ncd MixIosDemo\n../Mix\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

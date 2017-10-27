@@ -12,8 +12,13 @@ If you need English document for this project, [`MixPlainText ` English document
 # 局限
 
 1. 不能加密这样的 OC string，比如：@"a""b"，因为默认的正则表达式无法识别这种情况，确保将其改成 @"ab"，否则无法通过编译。
-2. 不能加密含 \nnn， \xnn， \unnnn 和 \Unnnnnnnn 这样的转义字符串，确保您的转义字符串不含这些转义，否则无法通过编译。
-3. 不能加密静态类型的 string。
+2. Mix 处理过程中如果遇到 "@"，这种字符串，会编译出错，需要改一下写法，使用下面的 cs 变量
+```
+NSString *s = @"@";
+char *cs = s.UTF8String;
+```
+3. 不能加密含 \nnn， \xnn， \unnnn 和 \Unnnnnnnn 这样的转义字符串，确保您的转义字符串不含这些转义，否则无法通过编译。
+4. 不能加密静态类型的 string。
 
 # 使用场景
 
@@ -28,12 +33,17 @@ If you need English document for this project, [`MixPlainText ` English document
 	```
 	# 默认是 Release 情况下运行，可根据需要自定义
 	if [ "${CONFIGURATION}" = "Release" ]; then
+	# 注意由于你的工程目录可能包含 Pods 这类第三方代码，所以你需要切换到你自己代码所在的目录比如 MixIosDemo 目录
+	# cd MixIosDemo/
+	# 如果你切换了工作目录，需要正确指定 Mix 程序的文件位置
+	# ../Mix
 	./Mix
 	fi
 	```
 	确保该 Run Script 在 Compile Souces 之前。
 3. 添加 MixIosDemo/MixOC/MixDecrypt.h 到您的工程中
 4. 在您的 pch 头文件中引入 MixDecrypt.h
+5. 如果遇到代码编译不过的问题，请到编译出错的地方比较原先的代码和经过 Mix 程序加密过后的区别，然后对原始代码进行一些相应修改。当然你可以给我提 issue。
 
 您可以随时参考 MixIosDemo 这个 iOS Demo 工程来了解具体配置方式。
 
@@ -47,6 +57,10 @@ If you need English document for this project, [`MixPlainText ` English document
 2. 修改 MixDecrypt.h 中 dl_getRealText 函数体的解密方法
 
 注意，不要使用复杂的加解密方法，同时解密方法要和加密方法配套，否则运行时会出错。
+
+# Warning
+
+由于该程序会改变您原来程序代码的内容，所以您在使用的时候一定要谨慎，最好是在版本控制系统（比如 Git，SVN）下使用，同时当前工作目录没有未 commit 的内容。
 
 # TODO
 
