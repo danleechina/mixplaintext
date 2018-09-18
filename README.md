@@ -1,5 +1,9 @@
 If you need English document for this project, [`MixPlainText ` English document](https://github.com/danleechina/MixPlainText/blob/master/README-en.md)
 
+# 重要
+
+目前想到一个更好的方案，就是使用 Lex （最新的实现叫做 Flex，这个工具在 macOS 上自带） （这个工具也叫做词法分析器的生成器）。后面有时间再更新。
+
 # MixPlainText
 
 该项目的作用是可以将 iOS 工程所有 Objective C 实现文件（后缀名为 m 的文件）中的明文进行加密混淆，如此一来，您的 app 的二进制文件中所有的明文都是经过混淆的。之前我总结了一点如何确保 iOS app 在越狱环境下的安全性，或许值得一看：[对 iOS app 进行安全加固](https://danleechina.github.io/ios-app-security-reinforce/)
