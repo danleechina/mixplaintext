@@ -16,8 +16,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"Hello world!");
-    NSLog(dl_getRealText(@"uJCQm52Gmt+IkI2Tm/8B"));
+    NSLog(dl_getRealText(@"t5qTk5DfiJCNk5ve/wE="));
+    NSLog(dl_getRealText(dl_getRealText(@"irW8rpLKzbiSi9S2lLbNq5LQx73/AQ==")));
     return YES;
 }
 

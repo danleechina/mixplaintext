@@ -98,7 +98,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 373371F61E7FC83E00071EA8 /* Build configuration list for PBXNativeTarget "MixIosDemo" */;
 			buildPhases = (
-				37BC25D41E7FD81300B67FC2 /* ShellScript */,
+				2E595BAF217F11F100F3C29A /* MixPlainText */,
 				373371DB1E7FC83E00071EA8 /* Sources */,
 				373371DC1E7FC83E00071EA8 /* Frameworks */,
 				373371DD1E7FC83E00071EA8 /* Resources */,
@@ -159,18 +159,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		37BC25D41E7FD81300B67FC2 /* ShellScript */ = {
+		2E595BAF217F11F100F3C29A /* MixPlainText */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = MixPlainText;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\ncd MixIosDemo\n../Mix\nfi";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\ncd MixIosDemo\nchmod +x ../mix.swift\n../mix.swift\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

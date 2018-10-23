@@ -31,33 +31,29 @@ char *cs = s.UTF8String;
 
 # 使用方式
 
-1. 编译运行 macOS 工程 Mix/Mix.xcodeproj，将得到的 Mix 二进制文件放到您需要混淆加密的工程的根目录。
-2. 打开您自己的工程，在 Build Phases 中添加 Run Script，内容为
+1. 打开您自己的工程，在 Build Phases 中添加 Run Script，内容为
 
 	```
-	# 默认是 Release 情况下运行，可根据需要自定义
-	if [ "${CONFIGURATION}" = "Release" ]; then
-	# 注意由于你的工程目录可能包含 Pods 这类第三方代码，所以你需要切换到你自己代码所在的目录比如 MixIosDemo 目录
-	# cd MixIosDemo/
-	# 如果你切换了工作目录，需要正确指定 Mix 程序的文件位置
-	# ../Mix
-	./Mix
-	fi
-	```
+    # 默认是 Debug 情况下运行，可根据需要自定义，比如 Release
+    if [ "${CONFIGURATION}" = "Debug" ]; then
+    # 注意由于你的工程目录可能包含 Pods 这类第三方代码，所以你需要切换到你自己代码所在的目录比如 MixIosDemo 目录
+    cd MixIosDemo
+    chmod +x ../mix.swift
+    ../mix.swift
+    fi
+    ```
 	确保该 Run Script 在 Compile Souces 之前。
-3. 添加 MixIosDemo/MixOC/MixDecrypt.h 到您的工程中
-4. 在您的 pch 头文件中引入 MixDecrypt.h
-5. 如果遇到代码编译不过的问题，请到编译出错的地方比较原先的代码和经过 Mix 程序加密过后的区别，然后对原始代码进行一些相应修改。当然你可以给我提 issue。
+2. 添加 MixIosDemo/MixOC/MixDecrypt.h 到您的工程中
+3. 在您的 pch 头文件中引入 MixDecrypt.h
+4. 如果遇到代码编译不过的问题，请到编译出错的地方比较原先的代码和经过 mix.swift 脚本加密过后的区别，然后对原始代码进行一些相应修改。当然你可以给我提 issue。
 
-您可以随时参考 MixIosDemo 这个 iOS Demo 工程来了解具体配置方式。
-
-现在 Swift 支持脚本运行，由于 Mix 这个二进制文件是由 Swift 写成，所以您也可以在您的打包脚本中，添加 `swift xxx.swift` (确保环境中的 swift 版本是 swift 3，这里的 xxx.swift 就是 repo 中 Mix/Mix/main.swift 文件)
+您可以参考 MixIosDemo 这个 iOS Demo 工程来了解具体配置方式。在运行这个工程的时候，你会发现代码中的  `NSLog(@"Hello world!");` 变成了 `NSLog(dl_getRealText(@"t5qTk5DfiJCNk5ve/wE="));` ，但是 app 运行的时候打印的仍然是 `Hello world!`。
 
 # 自定义加密混淆
 
 目前默认的加密方式是异或加密（可能也算不上加密，顶多算是混淆），如果需要自定义加密混淆方式，两个步骤：
 
-1. 修改 Mix/Mix/main.swift 中的加密方法，编译工程，替换您工程目录下的 Mix 二进制文件为编译生成的 Mix 文件
+1. 修改 MixIosDemo/mix.swift 中的加密方法
 2. 修改 MixDecrypt.h 中 dl_getRealText 函数体的解密方法
 
 注意，不要使用复杂的加解密方法，同时解密方法要和加密方法配套，否则运行时会出错。

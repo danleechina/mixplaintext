@@ -20,14 +20,16 @@ This project aims to encypt or obscure plain text for all the Objective C implem
 
 # Usage
 
-1. Compile macOS project Mix/Mix.xcodeproj, put the product "Mix" binary into your project's root directory.
-2. Open your project which needs to be obscured. In the Build Phases session of target, add a new Run Script, make sure this is before Compile Souces. The content of script is like below:
+1. Open your project which needs to be obscured. In the Build Phases session of target, add a new Run Script, make sure this is before Compile Souces. The content of script is like below:
  
  	```
- 	# default runs in Release, custom it in your need
-	if [ "${CONFIGURATION}" = "Release" ]; then
-	./Mix
-	fi
+     # 默认是 Debug 情况下运行，可根据需要自定义，比如 Release
+     if [ "${CONFIGURATION}" = "Debug" ]; then
+     # 注意由于你的工程目录可能包含 Pods 这类第三方代码，所以你需要切换到你自己代码所在的目录比如 MixIosDemo 目录
+     cd MixIosDemo
+     chmod +x ../mix.swift
+     ../mix.swift
+     fi
 	```
 	
 3. add MixIosDemo/MixOC/MixDecrypt.h in your project
@@ -35,13 +37,11 @@ This project aims to encypt or obscure plain text for all the Objective C implem
 
 You can watch MixIosDemo for detail setting
 
-At present, Swift file can be run like script. Because the Mix binary was written by Swift, you can also add `swift xxx.swift` to your packaging shell (Be sure your Swift version is 3.0 or above, and the xxx.swift is just Mix/Mix/main.swift in the repo)
-
 # Custom encrypt or obscure
 
 The default encrypt method is xor(maybe it just obscrue the plain text). Two steps to custom encrypt or obscure.
 
-1. Modify encrypt method in Mix/Mix/main.swift, compile project, replace your project's Mix binary file with the new Mix file.
+1. Modify encrypt method in mix.swift
 2. Modify decrypt method in dl_getRealText function in MixDecrypt.h
 
 Attention, don't use complex encyrpt/decyrpt method, and make sure encyrpt/decyprt right, or the running will fail.
